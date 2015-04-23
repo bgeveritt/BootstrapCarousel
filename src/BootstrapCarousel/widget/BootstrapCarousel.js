@@ -283,7 +283,11 @@
                                 //setup carouselItem
                                 carouselItem = carouselItem.split('{{first}}').join( i === 0 ? ' active' : '');
                                 if(objs[i].get(path) !== ''){
-                                  carouselItem = carouselItem.split('{{img}}').join(window.location.origin +'/file?guid='+ objs[i].get(path));
+                                    if (!window.location.origin) {
+                                    	//IE Fix
+                                        carouselItem = carouselItem.split('{{img}}').join(window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') +'/file?guid='+ objs[i].getGuid());
+                                    }
+                                    carouselItem = carouselItem.split('{{img}}').join(window.location.origin +'/file?guid='+ objs[i].getGuid());
                                 }
                                 else{
                                   carouselItem = carouselItem.split('{{img}}').join('data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==');
